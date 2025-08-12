@@ -50,7 +50,7 @@ function App() {
   );
 
   // Cambia el número por el tuyo si quieres recibir el mensaje directo
-  window.open(`https://wa.me/573153956553?text=${texto}`, '_blank');
+  window.open(`https://wa.me/573208895280?text=${texto}`, '_blank');
 };
   return (
     <div className="min-h-screen bg-white">
