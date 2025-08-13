@@ -508,10 +508,27 @@ function App() {
                     href="mailto:contaco@bullconsultoresjuridicos.com"
                     className="text-yellow-600 hover:text-yellow-700 transition-colors"
                   >
-                    contaco@bullconsultoresjuridicos.com
+                    c.salamancajuridico@gmail.com
                   </a>
                 </div>
               </div>
+
+              <div className="flex items-start space-x-4">
+  <div className="flex-shrink-0 p-3 bg-black rounded-lg">
+    <Phone className="h-6 w-6 text-yellow-400" />
+  </div>
+  <div>
+    <h3 className="text-lg font-semibold text-black mb-2">Teléfono</h3>
+    <a 
+      href="https://wa.me/573208895280"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-yellow-600 hover:text-yellow-700 transition-colors block"
+    >
+      +57 320 889 5280
+    </a>
+  </div>
+</div>
 
               <div className="flex items-start space-x-4">
                 <div className="flex-shrink-0 p-3 bg-black rounded-lg">
