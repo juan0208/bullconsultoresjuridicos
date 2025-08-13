@@ -16,14 +16,16 @@ import {
   Building,
   Factory,
   Home,
-  Landmark
+  Landmark,
+  Gavel,
+  UserCheck,
+  Heart
 } from 'lucide-react';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,24 +36,24 @@ function App() {
   }, []);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const form = formRef.current;
-  if (!form) return;
+    const form = formRef.current;
+    if (!form) return;
 
-  const nombre = (form.user_name as HTMLInputElement).value;
-  const email = (form.user_email as HTMLInputElement).value;
-  const telefono = (form.user_phone as HTMLInputElement).value;
-  const tipo = (form.consultation_type as HTMLSelectElement).value;
-  const mensaje = (form.message as HTMLTextAreaElement).value;
+    const nombre = (form.user_name as HTMLInputElement).value;
+    const email = (form.user_email as HTMLInputElement).value;
+    const telefono = (form.user_phone as HTMLInputElement).value;
+    const tipo = (form.consultation_type as HTMLSelectElement).value;
+    const mensaje = (form.message as HTMLTextAreaElement).value;
 
-  const texto = encodeURIComponent(
-    `Solicitud de consulta:\n\nNombre: ${nombre}\nEmail: ${email}\nTeléfono: ${telefono}\nTipo de consulta: ${tipo}\nMensaje: ${mensaje}`
-  );
+    const texto = encodeURIComponent(
+      `Solicitud de consulta:\n\nNombre: ${nombre}\nEmail: ${email}\nTeléfono: ${telefono}\nTipo de consulta: ${tipo}\nMensaje: ${mensaje}`
+    );
 
-  // Cambia el número por el tuyo si quieres recibir el mensaje directo
-  window.open(`https://wa.me/573208895280?text=${texto}`, '_blank');
-};
+    window.open(`https://wa.me/573208895280?text=${texto}`, '_blank');
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -71,6 +73,7 @@ function App() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex space-x-8">
               <a href="#inicio" className="text-white hover:text-yellow-400 transition-colors font-medium">Inicio</a>
+              <a href="#perfil" className="text-white hover:text-yellow-400 transition-colors font-medium">Perfil</a>
               <a href="#servicios" className="text-white hover:text-yellow-400 transition-colors font-medium">Servicios</a>
               <a href="#clientes" className="text-white hover:text-yellow-400 transition-colors font-medium">Clientes</a>
               <a href="#experiencia" className="text-white hover:text-yellow-400 transition-colors font-medium">Experiencia</a>
@@ -91,6 +94,7 @@ function App() {
             <div className="md:hidden py-4 border-t border-gray-800">
               <nav className="flex flex-col space-y-4">
                 <a href="#inicio" className="text-white hover:text-yellow-400 transition-colors font-medium">Inicio</a>
+                <a href="#perfil" className="text-white hover:text-yellow-400 transition-colors font-medium">Perfil</a>
                 <a href="#servicios" className="text-white hover:text-yellow-400 transition-colors font-medium">Servicios</a>
                 <a href="#clientes" className="text-white hover:text-yellow-400 transition-colors font-medium">Clientes</a>
                 <a href="#experiencia" className="text-white hover:text-yellow-400 transition-colors font-medium">Experiencia</a>
@@ -137,11 +141,11 @@ function App() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 bg-gray-50">
+      {/* Professional Profile Section */}
+      <section id="perfil" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div className="order-2 lg:order-1">
               <h2 className="text-3xl md:text-4xl font-bold text-black mb-6">
                 Experiencia y <span className="text-yellow-500">Profesionalismo</span>
               </h2>
@@ -162,19 +166,51 @@ function App() {
                   <Users className="h-6 w-6 text-yellow-500" />
                   <span className="text-gray-800 font-medium">Atención Personalizada</span>
                 </div>
+                <div className="flex items-center space-x-3">
+                  <Shield className="h-6 w-6 text-yellow-500" />
+                  <span className="text-gray-800 font-medium">Más de 15 años de experiencia</span>
+                </div>
               </div>
             </div>
-            <div className="bg-white rounded-2xl p-8 shadow-xl border border-yellow-100">
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center p-4 bg-black rounded-full mb-6">
-                  <Scale className="h-12 w-12 text-yellow-400" />
+            
+            {/* Professional Photo Section */}
+            <div className="order-1 lg:order-2">
+              <div className="relative">
+                <div className="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl p-1">
+                  <div className="bg-white rounded-xl p-8 text-center">
+  {/* Foto real del Dr. Salamanca */}
+  <div className="w-48 h-48 mx-auto mb-6 rounded-full overflow-hidden border-4 border-yellow-400 flex items-center justify-center bg-gray-100">
+    <img
+      src="/foto_abogado.jpeg"
+      alt="Dr. César Salamanca"
+      className="w-full h-full object-cover"
+    />
+  </div>
+  <h3 className="text-2xl font-bold text-black mb-2">Dr. César Augusto Salamanca Tovar</h3>
+  <p className="text-yellow-600 font-semibold mb-4">Consultor Jurídico Especializado</p>
+  <div className="bg-yellow-50 rounded-lg p-4">
+    <p className="text-gray-700 text-sm">
+      "Comprometido con la excelencia en el servicio jurídico, ofreciendo soluciones 
+      legales innovadoras y efectivas para cada situación."
+    </p>
+  </div>
+  {/* Professional credentials */}
+  <div className="mt-6 grid grid-cols-2 gap-4 text-center">
+    <div className="bg-black rounded-lg p-3">
+      <div className="text-yellow-400 font-bold text-lg">15+</div>
+      <div className="text-white text-xs">Años Experiencia</div>
+    </div>
+    <div className="bg-black rounded-lg p-3">
+      <div className="text-yellow-400 font-bold text-lg">200+</div>
+      <div className="text-white text-xs">Casos Exitosos</div>
+    </div>
+  </div>
+</div>
                 </div>
-                <h3 className="text-2xl font-bold text-black mb-4">Dr. César Augusto Salamanca Tovar</h3>
-                <p className="text-yellow-600 font-semibold mb-4">Consultor Jurídico Especializado</p>
-                <p className="text-gray-600">
-                  Comprometido con la excelencia en el servicio jurídico, ofreciendo soluciones 
-                  legales innovadoras y efectivas para cada situación.
-                </p>
+                
+                {/* Decorative elements */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400/20 rounded-full blur-xl"></div>
+                <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-black/5 rounded-full blur-xl"></div>
               </div>
             </div>
           </div>
@@ -194,6 +230,7 @@ function App() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Existing Services */}
             <div className="group bg-gray-50 hover:bg-yellow-50 rounded-xl p-8 transition-all duration-300 hover:shadow-lg border hover:border-yellow-200">
               <div className="inline-flex items-center justify-center p-4 bg-black group-hover:bg-yellow-500 rounded-lg mb-6 transition-colors duration-300">
                 <FileText className="h-8 w-8 text-yellow-400 group-hover:text-black" />
@@ -251,6 +288,37 @@ function App() {
               <h3 className="text-xl font-bold text-black mb-4">Asesoría Legal</h3>
               <p className="text-gray-600">
                 Consultoría preventiva y estratégica para evitar conflictos legales y optimizar decisiones.
+              </p>
+            </div>
+
+            {/* New Services */}
+            <div className="group bg-gray-50 hover:bg-yellow-50 rounded-xl p-8 transition-all duration-300 hover:shadow-lg border hover:border-yellow-200">
+              <div className="inline-flex items-center justify-center p-4 bg-black group-hover:bg-yellow-500 rounded-lg mb-6 transition-colors duration-300">
+                <Gavel className="h-8 w-8 text-yellow-400 group-hover:text-black" />
+              </div>
+              <h3 className="text-xl font-bold text-black mb-4">Derecho Administrativo</h3>
+              <p className="text-gray-600">
+                Asesoramiento en procedimientos administrativos, contratos estatales y relaciones con entidades públicas.
+              </p>
+            </div>
+
+            <div className="group bg-gray-50 hover:bg-yellow-50 rounded-xl p-8 transition-all duration-300 hover:shadow-lg border hover:border-yellow-200">
+              <div className="inline-flex items-center justify-center p-4 bg-black group-hover:bg-yellow-500 rounded-lg mb-6 transition-colors duration-300">
+                <UserCheck className="h-8 w-8 text-yellow-400 group-hover:text-black" />
+              </div>
+              <h3 className="text-xl font-bold text-black mb-4">Derecho Disciplinario</h3>
+              <p className="text-gray-600">
+                Defensa en procesos disciplinarios, asesoramiento preventivo y representación ante autoridades competentes.
+              </p>
+            </div>
+
+            <div className="group bg-gray-50 hover:bg-yellow-50 rounded-xl p-8 transition-all duration-300 hover:shadow-lg border hover:border-yellow-200">
+              <div className="inline-flex items-center justify-center p-4 bg-black group-hover:bg-yellow-500 rounded-lg mb-6 transition-colors duration-300">
+                <Heart className="h-8 w-8 text-yellow-400 group-hover:text-black" />
+              </div>
+              <h3 className="text-xl font-bold text-black mb-4">Derecho de Familia</h3>
+              <p className="text-gray-600">
+                Asesoramiento en divorcios, custodia, alimentos, sucesiones y todos los aspectos del derecho familiar.
               </p>
             </div>
           </div>
@@ -464,7 +532,6 @@ function App() {
                   <h3 className="text-lg font-semibold text-black mb-2">Dirección</h3>
                   <p className="text-gray-600">Cra. 13 N° 37 - 43 Oficina 1103</p>
                 </div>
-                
               </div>
             </div>
 
@@ -522,6 +589,9 @@ function App() {
                     <option value="Derecho Comercial">Derecho Comercial</option>
                     <option value="Litigios">Litigios</option>
                     <option value="Asesoría Legal General">Asesoría Legal General</option>
+                    <option value="Derecho Administrativo">Derecho Administrativo</option>
+                    <option value="Derecho Disciplinario">Derecho Disciplinario</option>
+                    <option value="Derecho de Familia">Derecho de Familia</option>
                   </select>
                 </div>
                 <div>
@@ -541,7 +611,7 @@ function App() {
                   className="w-full flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 px-6 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-400"
                 >
                   <Phone className="h-5 w-5" />
-                    Contactar
+                  Contactar
                 </button>
               </form>
             </div>
@@ -573,6 +643,9 @@ function App() {
                 <li>Derecho Laboral</li>
                 <li>Derecho Civil</li>
                 <li>Derecho Comercial</li>
+                <li>Derecho Administrativo</li>
+                <li>Derecho Disciplinario</li>
+                <li>Derecho de Familia</li>
                 <li>Litigios</li>
                 <li>Asesoría Legal</li>
               </ul>
